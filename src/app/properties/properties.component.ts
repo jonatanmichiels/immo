@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
+import { Property } from './property';
 
 @Component({
   selector: 'app-properties',
@@ -7,7 +9,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./properties.component.css'],
 })
 export class PropertiesComponent implements OnInit {
-  properties$ = this.api.getProperties$();
+  properties$: Observable<[Property]> = this.api.getProperties$();
 
   constructor(public api: ApiService) {}
 
