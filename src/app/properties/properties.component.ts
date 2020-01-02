@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-properties',
@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./properties.component.css'],
 })
 export class PropertiesComponent implements OnInit {
-  properties$ = this.http.get('/api/properties');
+  properties$ = this.api.getProperties$();
 
-  constructor(private http: HttpClient) {}
+  constructor(public api: ApiService) {}
 
   ngOnInit() {}
 }

@@ -1,2 +1,26 @@
-<p>{{ title }}</p>
-<router-outlet></router-outlet>
+<header>
+  <h1>
+    <a routerLink="/">{{ title }}</a>
+  </h1>
+  <nav>
+    <ul>
+      <li><a routerLink="/">home</a></li>
+      <li *ngIf="this.auth.isAuthenticated">
+        <a routerLink="properties">properties</a>
+      </li>
+      <li *ngIf="this.auth.isAuthenticated && auth.user$ | async as user">
+        <a routerLink="profile">Hi, {{ user.given_name }}</a>
+      </li>
+    </ul>
+  </nav>
+  <button *ngIf="!auth.isAuthenticated" (click)="this.auth.login()">
+    Login
+  </button>
+  <button *ngIf="auth.isAuthenticated" (click)="this.auth.logout()">
+    Logout
+  </button>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>&copy; Jonatan Michiels | 2020</footer>
