@@ -8,7 +8,7 @@
       "location": "Jabbeke",
       "bedrooms": 3,
       "bathrooms": 1,
-      "garage": 1
+      "garages": 1
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "location": "Zerkegem",
       "bedrooms": 4,
       "bathrooms": 1,
-      "garage": 1
+      "garages": 1
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "location": "Jabbeke",
       "bedrooms": 2,
       "bathrooms": 1,
-      "garage": 0
+      "garages": 0
     }
   ]
 }

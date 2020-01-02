@@ -6,5 +6,5 @@ export interface Property {
   location: string;
   bedrooms: number;
   bathrooms: number;
-  garage: number;
+  garages: number;
 }
