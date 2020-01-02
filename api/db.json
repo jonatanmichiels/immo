@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "type": "house",
+      "price": 295000,
+      "surface": 140,
+      "location": "Jabbeke",
+      "bedrooms": 3,
+      "bathrooms": 1,
+      "garage": 1
+    },
+    {
+      "id": 2,
+      "type": "house",
+      "price": 319500,
+      "surface": 170,
+      "location": "Zerkegem",
+      "bedrooms": 4,
+      "bathrooms": 1,
+      "garage": 1
+    },
+    {
+      "id": 3,
+      "type": "appartment",
+      "price": 259000,
+      "surface": 80,
+      "location": "Jabbeke",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "garage": 0
+    }
+  ]
+}

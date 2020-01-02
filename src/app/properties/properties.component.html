@@ -1,1 +1,5 @@
 <p>properties works!</p>
+
+<ul *ngFor="let property of properties$ | async">
+  <li>{{ property.location }} ({{ property.price | currency }})</li>
+</ul>
