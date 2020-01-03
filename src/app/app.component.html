@@ -1,15 +1,43 @@
 <header>
   <h1>
-    <a routerLink="/">{{ title }}</a>
+    <a routerLink="/">
+      <img
+        src="../assets/ordina-logo-orange-300px.png"
+        alt="ordina-logo-orange-300px"
+      />
+      <span>{{ title }}</span>
+    </a>
   </h1>
   <nav>
     <ul>
-      <li><a routerLink="/">home</a></li>
-      <li *ngIf="this.auth.isAuthenticated">
-        <a routerLink="properties">properties</a>
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
       </li>
-      <li *ngIf="this.auth.isAuthenticated && auth.user$ | async as user">
-        <a routerLink="profile">Hi, {{ user.given_name }}</a>
+      <li *ngIf="this.auth.isAuthenticated">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="properties"
+          >properties</a
+        >
+      </li>
+      <li
+        class="profile"
+        *ngIf="this.auth.isAuthenticated && auth.user$ | async as user"
+      >
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="profile"
+          >Hi, {{ user.given_name }}</a
+        >
       </li>
     </ul>
   </nav>
@@ -23,4 +51,4 @@
 <main>
   <router-outlet></router-outlet>
 </main>
-<footer>&copy; Jonatan Michiels | 2020</footer>
+<footer>&copy; OpenID connect & OAuth2.0 demo application | 2020</footer>

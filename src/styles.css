@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './reset.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --main-bg-color: #fff;
+
+  --main-theme-color: #e88508;
+  --second-theme-color: #635f5a;
+
+  --main-font-color: #1f2831;
+  --second-font-color: #fff;
+
+  background: var(--main-bg-color);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: var(--main-font-color);
+}
+
+h1 {
+  font-weight: 24px;
+}
+
+h2 {
+  font-weight: 20px;
+}
+
+h3 {
+  font-weight: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-font-color);
+}
+
+button {
+  border: none;
+  background: var(--main-theme-color);
+  color: var(--second-font-color);
+  border-radius: 5px;
+  min-width: 90px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+button:hover {
+  transform: scale(0.95);
+}
+
+a,
+button {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
