@@ -1,0 +1,56 @@
+table {
+  width: 100%;
+  border: 3px solid var(--second-theme-color);
+}
+
+tr {
+  height: 50px;
+}
+
+td {
+  padding: 0 10px;
+  text-transform: capitalize;
+  vertical-align: middle;
+}
+
+td:last-child {
+  text-transform: none;
+  text-align: right;
+}
+
+thead {
+  background-color: var(--second-theme-color);
+}
+
+thead td {
+  color: var(--ground-color);
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+thead td:last-child {
+  color: var(--ground-color);
+  font-weight: normal;
+  font-size: 100%;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--second-theme-color);
+}
+
+tbody td:last-child {
+  margin-left: 5px;
+}
+
+tbody td:last-child a {
+  margin-left: 5px;
+  transition: all 0.4s;
+}
+
+tbody td:last-child a:hover {
+  color: var(--main-theme-color);
+}

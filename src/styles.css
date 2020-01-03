@@ -8,45 +8,56 @@
 }
 
 :root {
-  --main-bg-color: #fff;
-
+  --ground-color: #fff;
+  --font-color: #1f2831;
   --main-theme-color: #e88508;
   --second-theme-color: #635f5a;
 
-  --main-font-color: #1f2831;
-  --second-font-color: #fff;
-
-  background: var(--main-bg-color);
+  background: var(--ground-color);
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  color: var(--main-font-color);
+  color: var(--font-color);
+}
+
+section {
+  margin: 20px;
 }
 
 h1 {
-  font-weight: 24px;
+  font-size: 20px;
 }
 
 h2 {
-  font-weight: 20px;
+  font-size: 16px;
+  color: var(--second-theme-color);
+  display: block;
+  margin: 20px 0;
+  padding: 20px 0;
+  border-bottom: 3px solid var(--main-theme-color);
 }
 
 h3 {
-  font-weight: 16px;
+  font-weight: 12px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
 }
 
 a {
-  text-decoration: none;
-  color: var(--main-font-color);
+  cursor: pointer;
 }
 
 button {
   border: none;
   background: var(--main-theme-color);
-  color: var(--second-font-color);
+  color: var(--ground-color);
   border-radius: 5px;
   min-width: 90px;
   height: 30px;
   cursor: pointer;
+  font-size: 12px;
   transition: all 0.4s;
 }
 
@@ -54,9 +65,8 @@ button:hover {
   transform: scale(0.95);
 }
 
-a,
+h2,
 button {
-  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }

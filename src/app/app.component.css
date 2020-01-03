@@ -35,7 +35,11 @@ li.profile {
 a {
   display: inline-block;
   height: 50px;
-  color: var(--second-font-color);
+  color: var(--ground-color);
+  text-decoration: none;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   align-content: center;
   display: flex;
   align-items: center;

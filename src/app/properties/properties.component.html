@@ -1,3 +1,33 @@
-<pre *ngIf="properties$ | async as properties">
-  <code>{{ properties | json }}</code>
-</pre>
+<section>
+  <h2>Properties</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Price</td>
+        <td>Type</td>
+        <td>Location</td>
+        <td>Surface</td>
+        <td>Bedrooms</td>
+        <td>Bathrooms</td>
+        <td>Garages</td>
+        <td><button>add</button></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties$ | async">
+        <td>{{ property.price | currency }}</td>
+        <td>{{ property.type }}</td>
+        <td>{{ property.location }}</td>
+        <td>{{ property.surface }}</td>
+        <td>{{ property.bedrooms }}</td>
+        <td>{{ property.bathrooms }}</td>
+        <td>{{ property.garages }}</td>
+        <td>
+          <a>edit</a>
+          <a>delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
