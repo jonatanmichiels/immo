@@ -1,33 +1,113 @@
 <section>
   <h2>Properties</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <td>Price</td>
-        <td>Type</td>
-        <td>Location</td>
-        <td>Surface</td>
-        <td>Bedrooms</td>
-        <td>Bathrooms</td>
-        <td>Garages</td>
-        <td><button>add</button></td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let property of properties$ | async">
-        <td>{{ property.price | currency }}</td>
-        <td>{{ property.type }}</td>
-        <td>{{ property.location }}</td>
-        <td>{{ property.surface }}</td>
-        <td>{{ property.bedrooms }}</td>
-        <td>{{ property.bathrooms }}</td>
-        <td>{{ property.garages }}</td>
-        <td>
-          <a>edit</a>
-          <a>delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <p *ngIf="!properties">Loading...</p>
+
+  <div *ngIf="properties">
+    <table>
+      <thead>
+        <tr>
+          <td>Price</td>
+          <td>Type</td>
+          <td>Location</td>
+          <td>Surface</td>
+          <td>Bedrooms</td>
+          <td>Bathrooms</td>
+          <td>Garages</td>
+          <td><button (click)="create()">add</button></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties">
+          <td>{{ property.price | currency }}</td>
+          <td>{{ property.type }}</td>
+          <td>{{ property.location }}</td>
+          <td>{{ property.surface }}</td>
+          <td>{{ property.bedrooms }}</td>
+          <td>{{ property.bathrooms }}</td>
+          <td>{{ property.garages }}</td>
+          <td>
+            <button (click)="update(property)">update</button>
+            <button (click)="destroy(property)">destroy</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <form *ngIf="currentProperty" (ngSubmit)="submit()" #propertyForm="ngForm">
+      <fieldset>
+        <label for="price">Price</label>
+        <input
+          [(ngModel)]="currentProperty.price"
+          type="number"
+          name="price"
+          id="price"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="type">Type</label>
+        <select
+          [(ngModel)]="currentProperty.type"
+          name="type"
+          id="type"
+          required
+        >
+          <option value="apartment">Apartment</option>
+          <option value="house">House</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="location">Location</label>
+        <input
+          [(ngModel)]="currentProperty.location"
+          type="text"
+          name="location"
+          id="location"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="surface">Surface</label>
+        <input
+          [(ngModel)]="currentProperty.surface"
+          type="number"
+          name="surface"
+          id="surface"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="bedrooms">Bedrooms</label>
+        <input
+          [(ngModel)]="currentProperty.bedrooms"
+          type="number"
+          name="bedrooms"
+          id="bedrooms"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="bathrooms">Bathrooms</label>
+        <input
+          [(ngModel)]="currentProperty.bathrooms"
+          type="number"
+          name="bathrooms"
+          id="bathrooms"
+          required
+        />
+      </fieldset>
+      <fieldset>
+        <label for="garages">Garages</label>
+        <input
+          [(ngModel)]="currentProperty.garages"
+          type="number"
+          name="garages"
+          id="garages"
+          required
+        />
+      </fieldset>
+      <button type="submit" [disabled]="!propertyForm.form.valid">Save</button>
+      <button (click)="resetForm()">Cancel</button>
+    </form>
+  </div>
 </section>

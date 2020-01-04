@@ -65,6 +65,12 @@ button:hover {
   transform: scale(0.95);
 }
 
+button[disabled] {
+  cursor: not-allowed;
+  transform: scale(1);
+  background: var(--second-theme-color);
+}
+
 h2,
 button {
   text-transform: uppercase;

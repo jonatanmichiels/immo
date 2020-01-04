@@ -1,3 +1,9 @@
+div {
+  display: grid;
+  grid-template-rows: 1fr 400px;
+  grid-gap: 10px;
+}
+
 table {
   width: 100%;
   border: 3px solid var(--second-theme-color);
@@ -9,13 +15,20 @@ tr {
 
 td {
   padding: 0 10px;
-  text-transform: capitalize;
   vertical-align: middle;
 }
 
+td:nth-child(2),
+td:nth-child(3) {
+  text-transform: capitalize;
+}
+
 td:last-child {
-  text-transform: none;
   text-align: right;
+}
+
+td:last-child button {
+  margin-left: 10px;
 }
 
 thead {
@@ -30,27 +43,28 @@ thead td {
   letter-spacing: 2px;
 }
 
-thead td:last-child {
-  color: var(--ground-color);
-  font-weight: normal;
-  font-size: 100%;
-  text-transform: none;
-  letter-spacing: normal;
-}
-
 tbody tr {
   border-bottom: 1px solid var(--second-theme-color);
 }
 
-tbody td:last-child {
-  margin-left: 5px;
+form {
+  margin: 10px 0;
 }
 
-tbody td:last-child a {
-  margin-left: 5px;
-  transition: all 0.4s;
+form button {
+  margin-right: 10px;
 }
 
-tbody td:last-child a:hover {
-  color: var(--main-theme-color);
+fieldset {
+  margin: 5px;
+}
+
+label {
+  width: 150px;
+  display: inline-block;
+}
+
+input,
+select {
+  width: 400px;
 }

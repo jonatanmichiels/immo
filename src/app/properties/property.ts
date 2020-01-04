@@ -1,6 +1,6 @@
 export interface Property {
   id: number;
-  type: 'house' | 'appartement';
+  type: 'house' | 'apartement';
   price: number;
   surface: number;
   location: string;
