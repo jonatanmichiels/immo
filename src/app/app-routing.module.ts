@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { Routes, RouterModule } from '@angular/router';
-import { InterceptorService } from './interceptor.service';
 
 const routes: Routes = [
   {
@@ -19,12 +18,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true,
-    },
-  ],
 })
 export class AppRoutingModule {}

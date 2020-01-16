@@ -6,8 +6,7 @@ const db = require('./db.json');
 const app = express();
 
 const authConfig = {
-  domain: 'jonatanm.eu.auth0.com',
-  audience: 'http://localhost:3000/',
+  domain: 'auth.meys.io/auth/realms/ordina',
 };
 
 const checkJwt = jwt({
@@ -15,11 +14,9 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
+    jwksUri: `https://${authConfig.domain}/protocol/openid-connect/certs`,
   }),
-
-  audience: authConfig.audience,
-  issuer: `https://${authConfig.domain}/`,
+  issuer: `https://${authConfig.domain}`,
   algorithm: ['RS256'],
 });
 

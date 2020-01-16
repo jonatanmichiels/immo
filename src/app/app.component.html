@@ -18,7 +18,7 @@
           >Home</a
         >
       </li>
-      <li *ngIf="this.auth.isAuthenticated">
+      <li>
         <a
           routerLink="/"
           routerLinkActive="active"
@@ -27,7 +27,7 @@
           >properties</a
         >
       </li>
-      <li
+      <!-- <li
         class="profile"
         *ngIf="this.auth.isAuthenticated && auth.user$ | async as user"
       >
@@ -38,13 +38,13 @@
           routerLink="profile"
           >Hi, {{ user.given_name }}</a
         >
-      </li>
+      </li> -->
     </ul>
   </nav>
-  <button *ngIf="!auth.isAuthenticated" (click)="this.auth.login()">
+  <button (click)="this.login()">
     Login
   </button>
-  <button *ngIf="auth.isAuthenticated" (click)="this.auth.logout()">
+  <button (click)="this.logout()">
     Logout
   </button>
 </header>
