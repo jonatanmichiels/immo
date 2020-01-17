@@ -1,6 +1,7 @@
 <ng-container
   *ngIf="{
-    isAuthenticated: this.auth.isAuthenticated$ | async
+    isAuthenticated: this.auth.isAuthenticated$ | async,
+    user: this.auth.user$ | async
   } as data"
 >
   <header>
@@ -33,16 +34,13 @@
             >properties</a
           >
         </li>
-        <li
-          class="profile"
-          *ngIf="data.isAuthenticated && this.auth.user$ | async as user"
-        >
+        <li class="profile" *ngIf="data.isAuthenticated && data.user">
           <a
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             routerLink="profile"
-            >Hi, {{ user['given_name'] }}</a
+            >Hi, {{ data.user['given_name'] }}</a
           >
         </li>
       </ul>

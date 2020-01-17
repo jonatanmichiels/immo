@@ -7,7 +7,6 @@ import {
 } from 'angular-oauth2-oidc';
 import { map } from 'rxjs/operators';
 import { issuer, clientId } from 'auth.conf.json';
-import { debug } from 'util';
 
 const authConfig: AuthConfig = {
   issuer,
