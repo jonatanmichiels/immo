@@ -1,54 +1,61 @@
-<header>
-  <h1>
-    <a routerLink="/">
-      <img
-        src="../assets/ordina-logo-orange-300px.png"
-        alt="ordina-logo-orange-300px"
-      />
-      <span>{{ title }}</span>
-    </a>
-  </h1>
-  <nav>
-    <ul>
-      <li>
-        <a
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Home</a
+<ng-container
+  *ngIf="{
+    isAuthenticated: this.auth.isAuthenticated$ | async
+  } as data"
+>
+  <header>
+    <h1>
+      <a routerLink="/">
+        <img
+          src="../assets/ordina-logo-orange-300px.png"
+          alt="ordina-logo-orange-300px"
+        />
+        <span>{{ title }}</span>
+      </a>
+    </h1>
+    <nav>
+      <ul>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="properties"
+            *ngIf="data.isAuthenticated"
+            >properties</a
+          >
+        </li>
+        <li
+          class="profile"
+          *ngIf="data.isAuthenticated && this.auth.user$ | async as user"
         >
-      </li>
-      <li>
-        <a
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="properties"
-          >properties</a
-        >
-      </li>
-      <!-- <li
-        class="profile"
-        *ngIf="this.auth.isAuthenticated && auth.user$ | async as user"
-      >
-        <a
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="profile"
-          >Hi, {{ user.given_name }}</a
-        >
-      </li> -->
-    </ul>
-  </nav>
-  <button (click)="this.login()">
-    Login
-  </button>
-  <button (click)="this.logout()">
-    Logout
-  </button>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<footer>&copy; OpenID connect & OAuth2.0 demo application | 2020</footer>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="profile"
+            >Hi, {{ user['given_name'] }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <button *ngIf="!data.isAuthenticated" (click)="this.auth.login()">
+      Login
+    </button>
+    <button *ngIf="data.isAuthenticated" (click)="this.auth.logout()">
+      Logout
+    </button>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer>&copy; OpenID connect & OAuth2.0 demo application | 2020</footer>
+</ng-container>
