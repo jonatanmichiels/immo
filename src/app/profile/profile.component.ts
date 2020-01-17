@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { AuthService } from '../auth-service';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +7,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(public oauthService: OAuthService) {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit() {}
 }
