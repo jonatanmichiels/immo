@@ -2,21 +2,18 @@ const express = require('express');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const db = require('./db.json');
+const { jwksUri, issuer } = require('../auth.conf.json');
 
 const app = express();
-
-const authConfig = {
-  domain: 'auth.meys.io/auth/realms/ordina',
-};
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${authConfig.domain}/protocol/openid-connect/certs`,
+    jwksUri,
   }),
-  issuer: `https://${authConfig.domain}`,
+  issuer,
   algorithm: ['RS256'],
 });
 

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { OAuthService, NullValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
+import {
+  OAuthService,
+  NullValidationHandler,
+  AuthConfig,
+} from 'angular-oauth2-oidc';
+
+import { issuer, clientId } from 'auth.conf.json';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +36,20 @@ export class AppComponent {
   }
 
   private configure() {
+    const authConfig: AuthConfig = {
+      issuer,
+      clientId,
+      redirectUri: window.location.origin,
+      responseType: 'code',
+      scope: 'openid profile email offline_access api',
+      showDebugInformation: true,
+      disableAtHashCheck: true,
+    };
+
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new NullValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
     // this.oauthService.refreshToken();
-    // this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.setupAutomaticSilentRefresh();
   }
 }
