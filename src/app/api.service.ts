@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
+import { catchError, map, tap } from 'rxjs/operators';
 import { Property } from './properties/property';
 
 const API = 'https://immo-keycloak.meys.io/api';
@@ -13,10 +12,11 @@ const API = 'https://immo-keycloak.meys.io/api';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  getProperties$(): Observable<[Property]> {
-    return this.http
-      .get<[Property]>(`${API}/properties`)
-      .pipe(catchError(err => throwError(err)));
+  getProperties$(): Observable<Property[]> {
+    return this.http.get<[Property]>(`${API}/properties`).pipe(
+      map(arr => arr.map(p => ({ ...p, type: p.type.toLowerCase() }))),
+      catchError(err => throwError(err))
+    );
   }
 
   createProperty$(property: Partial<Property>): Observable<{}> {
@@ -31,7 +31,7 @@ export class ApiService {
       .pipe(catchError(err => throwError(err)));
   }
 
-  destroyProperty$(id: number): Observable<{}> {
+  destroyProperty$(id: string): Observable<{}> {
     return this.http
       .delete<number>(`${API}/properties/${id}`)
       .pipe(catchError(err => throwError(err)));

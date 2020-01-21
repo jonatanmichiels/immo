@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Subject, Observable } from 'rxjs';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { Property } from './property';
 
@@ -12,17 +12,17 @@ import { Property } from './property';
 })
 export class PropertiesComponent implements OnInit, OnDestroy {
   currentProperty: Partial<Property> = undefined;
-  properties: [Property] = undefined;
+  properties: Property[] = undefined;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
-  fetchProperties$: Observable<[Property]> = this.api
+  fetchProperties$: Observable<Property[]> = this.api
     .getProperties$()
     .pipe(takeUntil(this.destroy$));
 
   constructor(public api: ApiService) {}
 
   ngOnInit() {
-    this.fetchProperties$.subscribe(res => this.setProperties(res));
+    this.fetchProperties$.pipe().subscribe(res => this.setProperties(res));
   }
 
   ngOnDestroy() {
@@ -80,7 +80,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     this.currentProperty = undefined;
   }
 
-  private setProperties(res: [Property]) {
+  private setProperties(res: Property[]) {
     this.currentProperty = undefined;
     this.properties = res;
   }
