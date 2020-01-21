@@ -14,7 +14,10 @@ import { BearerTokenInterceptor } from './bearer-token-interceptor';
     HttpClientModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['/api'],
+        allowedUrls: [
+          'https://immo-keycloak.meys.io',
+          'https://immo-auth0.meys.io',
+        ],
         sendAccessToken: true,
       },
     }),
