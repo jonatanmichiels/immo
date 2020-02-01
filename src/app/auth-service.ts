@@ -7,6 +7,7 @@ import {
 } from 'angular-oauth2-oidc';
 import { map } from 'rxjs/operators';
 import { issuer, clientId } from 'auth.conf.json';
+import { BehaviorSubject } from 'rxjs';
 
 const authConfig: AuthConfig = {
   issuer,
@@ -22,7 +23,9 @@ const authConfig: AuthConfig = {
   providedIn: 'root',
 })
 export class AuthService {
-  user$ = this.oauthService.events.pipe(map(() => this.getClaims()));
+  // tslint:disable-next-line:variable-name
+  _user$ = new BehaviorSubject(null);
+  user$ = this._user$.asObservable();
   isAuthenticated$ = this.user$.pipe(map(() => this.hasValidIdToken()));
 
   constructor(private oauthService: OAuthService, private router: Router) {}
@@ -32,6 +35,12 @@ export class AuthService {
     this.oauthService.tokenValidationHandler = new NullValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
     this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.events.subscribe(e => {
+      this._user$.next(this.getClaims());
+      if (e.type === 'token_received' && this.oauthService.state) {
+        this.router.navigateByUrl(this.oauthService.state);
+      }
+    });
   }
 
   login(targetUrl: string = this.router.url) {
