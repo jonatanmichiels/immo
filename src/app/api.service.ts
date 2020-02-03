@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Property } from './properties/property';
 
-const API = 'https://immo-keycloak.meys.io/api';
+const API = 'https://immo-unsecured.meys.io/api';
 
 @Injectable({
   providedIn: 'root',
