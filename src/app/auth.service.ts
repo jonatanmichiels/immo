@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   OAuthService,
   AuthConfig,
   NullValidationHandler,
 } from 'angular-oauth2-oidc';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { clientId, issuer } from 'auth.conf.json';
 
 @Injectable({
@@ -26,8 +27,12 @@ export class AuthService {
   private _user$ = new BehaviorSubject(null);
   user$ = this._user$.asObservable();
   isAuthenticated$ = this.user$.pipe(map(() => this.hasValidIdToken()));
+  isAdmin$ = this.user$.pipe(
+    filter(user => !!user),
+    map(({ roles }) => roles.includes('ADMIN'))
+  );
 
-  constructor(private oAuthService: OAuthService) {}
+  constructor(private oAuthService: OAuthService, private router: Router) {}
 
   setup() {
     this.oAuthService.configure(this.config); // pass configuration
@@ -36,11 +41,14 @@ export class AuthService {
 
     this.oAuthService.events.subscribe(e => {
       this._user$.next(this.getClaims());
+      if (e.type === 'token_received' && this.oAuthService.state) {
+        this.router.navigateByUrl(this.oAuthService.state);
+      }
     });
   }
 
-  login() {
-    this.oAuthService.initCodeFlow();
+  login(targetUrl: string = this.router.url) {
+    this.oAuthService.initCodeFlow(targetUrl);
   }
 
   logout() {
