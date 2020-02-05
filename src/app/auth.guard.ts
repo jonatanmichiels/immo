@@ -21,6 +21,11 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authService.hasValidIdToken();
+    if (this.authService.hasValidIdToken()) {
+      return true;
+    }
+
+    this.authService.login(state.url);
+    return false;
   }
 }

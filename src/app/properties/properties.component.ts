@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { Property } from './property';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-properties',
@@ -13,16 +14,18 @@ import { Property } from './property';
 export class PropertiesComponent implements OnInit, OnDestroy {
   currentProperty: Partial<Property> = undefined;
   properties: Property[] = undefined;
+  hasRights = false;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   fetchProperties$: Observable<Property[]> = this.api
     .getProperties$()
     .pipe(takeUntil(this.destroy$));
 
-  constructor(public api: ApiService) {}
+  constructor(public api: ApiService, public auth: AuthService) {}
 
   ngOnInit() {
     this.fetchProperties$.pipe().subscribe(res => this.setProperties(res));
+    this.isAdmin();
   }
 
   ngOnDestroy() {
@@ -83,5 +86,11 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   private setProperties(res: Property[]) {
     this.currentProperty = undefined;
     this.properties = res;
+  }
+
+  private isAdmin() {
+    return this.auth.isAdmin$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isAdmin => ( this.hasRights = isAdmin));
   }
 }
