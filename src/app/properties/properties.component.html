@@ -14,7 +14,9 @@
           <td>Bedrooms</td>
           <td>Bathrooms</td>
           <td>Garages</td>
-          <td><button (click)="create()">add</button></td>
+          <td>
+            <button *ngIf="hasRights" (click)="create()">add</button>
+          </td>
         </tr>
       </thead>
       <tbody>
@@ -27,8 +29,8 @@
           <td>{{ property.bathrooms }}</td>
           <td>{{ property.garages }}</td>
           <td>
-            <button (click)="update(property)">update</button>
-            <button (click)="destroy(property)">destroy</button>
+            <button *ngIf="hasRights" (click)="update(property)">update</button>
+            <button *ngIf="hasRights" (click)="destroy(property)">destroy</button>
           </td>
         </tr>
       </tbody>

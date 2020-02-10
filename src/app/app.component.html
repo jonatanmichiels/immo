@@ -1,7 +1,7 @@
 <ng-container
   *ngIf="{
-    isAuthenticated: this.auth.isAuthenticated$ | async,
-    user: this.auth.user$ | async
+    isAuthenticated: authService.isAuthenticated$ | async,
+    user: authService.user$ | async
   } as data"
 >
   <header>
@@ -26,29 +26,28 @@
         </li>
         <li>
           <a
-            routerLink="/"
+            *ngIf="data.isAuthenticated"
+            routerLink="properties"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            routerLink="properties"
-            *ngIf="data.isAuthenticated"
             >properties</a
           >
         </li>
-        <li class="profile" *ngIf="data.isAuthenticated && data.user">
+        <li class="profile">
           <a
-            routerLink="/"
+            *ngIf="data.isAuthenticated && data.user"
+            routerLink="profile"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            routerLink="profile"
             >Hi, {{ data.user['given_name'] }}</a
           >
         </li>
       </ul>
     </nav>
-    <button *ngIf="!data.isAuthenticated" (click)="this.auth.login()">
+    <button *ngIf="!data.isAuthenticated" (click)="authService.login()">
       Login
     </button>
-    <button *ngIf="data.isAuthenticated" (click)="this.auth.logout()">
+    <button *ngIf="data.isAuthenticated" (click)="authService.logout()">
       Logout
     </button>
   </header>
