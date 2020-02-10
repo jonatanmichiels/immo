@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['https://immo-keycloak.meys.io'],
+        allowedUrls: ['https://immo-keycloak.meys.io', 'https://immo-auth0.meys.io'],
         sendAccessToken: true,
       },
     }),

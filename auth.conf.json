@@ -1,5 +1,5 @@
 {
-  "jwksUri": "https://auth.meys.io/auth/realms/ordina/protocol/openid-connect/certs",
-  "issuer": "https://auth.meys.io/auth/realms/ordina",
-  "clientId": "immo-spa"
+  "jwksUri": "https://jonatanm.eu.auth0.com/.well-known/jwks.json",
+  "issuer": "https://jonatanm.eu.auth0.com/",
+  "clientId": "j6rEDVKcrAGW3CPegUxPlEgQUUpjVYnd"
 }
