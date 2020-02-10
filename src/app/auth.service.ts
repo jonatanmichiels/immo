@@ -21,6 +21,9 @@ export class AuthService {
     scope: 'openid profile email offline_access api', // We grand our identity server to use tho following information about us publicly
     showDebugInformation: true, // debugging purposes, do not use in production
     disableAtHashCheck: true, // our server does not support this, even this is recommended by the OIDC specs
+    customQueryParams: {
+      audience: 'https://immo-auth0.meys.io',
+    },
   };
 
   // tslint:disable-next-line:variable-name
@@ -29,7 +32,7 @@ export class AuthService {
   isAuthenticated$ = this.user$.pipe(map(() => this.hasValidIdToken()));
   isAdmin$ = this.user$.pipe(
     filter(user => !!user),
-    map(({ roles }) => roles.includes('ADMIN'))
+    map(user => (user.roles ? user.roles.includes('ADMIN') : false))
   );
 
   constructor(private oAuthService: OAuthService, private router: Router) {}
