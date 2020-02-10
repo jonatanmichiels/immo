@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Property } from './properties/property';
 
-const API = 'https://immo-keycloak.meys.io/api';
+const API = 'https://immo-auth0.meys.io/api';
 
 @Injectable({
   providedIn: 'root',
